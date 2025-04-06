@@ -71,16 +71,22 @@ public class Tamagotchi {
     }
 
     public void checkStatus() {
-        System.out.println("------ Status de " + name + " ------");
-        System.out.println("Fase: " + stage);
-        System.out.println("Idade: " + age);
-        System.out.println("Fome: " + hunger);
-        System.out.println("Felicidade: " + happiness);
-        System.out.println("Energia: " + energy);
-        System.out.println("Higiene: " + hygiene);
-        System.out.println("Social: " + social);
-        System.out.println("Saúde: " + health);
-        System.out.println("------------------------------");
+        System.out.println(getStatus());
+    }
+
+    // Método para retornar o status como String (usado na interface gráfica)
+    public String getStatus() {
+        String status = "------ Status de " + name + " ------\n";
+        status += "Fase: " + stage + "\n";
+        status += "Idade: " + age + "\n";
+        status += "Fome: " + hunger + "\n";
+        status += "Felicidade: " + happiness + "\n";
+        status += "Energia: " + energy + "\n";
+        status += "Higiene: " + hygiene + "\n";
+        status += "Social: " + social + "\n";
+        status += "Saúde: " + health + "\n";
+        status += "------------------------------";
+        return status;
     }
 
     public void passTime() {
