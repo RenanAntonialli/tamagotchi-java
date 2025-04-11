@@ -1,112 +1,138 @@
-# Projeto Tamagotchi
+# Projeto Tamagotchi Virtual
 
-## Visão Geral
+Este projeto simula um Tamagotchi – um pet virtual que o usuário deve cuidar por meio de ações como alimentar, brincar, dormir, higienizar e socializar. O sistema foi desenvolvido em Java, utilizando os conceitos de Programação Orientada a Objetos e uma interface gráfica baseada em Swing para proporcionar uma experiência interativa e realista.
 
-O sistema simula um Tamagotchi virtual – um pet digital cuja criação e cuidado são gerenciados por meio de um conjunto de ações que afetam atributos como fome, energia, felicidade, higiene, socialização e saúde. O projeto foi desenvolvido utilizando os conceitos de Programação Orientada a Objetos (POO) utilizando a linguagem JAVA.
+---
 
-──────────────────────────────
-1. Estrutura do Código
-──────────────────────────────
+## Sumário
+
+- [Visão Geral do Projeto](#visão-geral-do-projeto)
+- [Estrutura do Código](#estrutura-do-código)
+- [Funcionalidades](#funcionalidades)
+- [Decisões de Projeto](#decisões-de-projeto)
+- [Como Executar](#como-executar)
+- [Possíveis Melhorias](#possíveis-melhorias)
+
+---
+
+## Visão Geral do Projeto
+
+O projeto simula um Tamagotchi real, onde o pet virtual possui diversos atributos (como fome, energia, felicidade, higiene, social e saúde) que variam de 0 a 100. O comportamento do pet é afetado por ações realizadas pelo usuário e pela passagem do tempo. A interface gráfica apresenta:
+
+- **Imagens Dinâmicas:** Diferentes imagens (em formato .png) são exibidas conforme a fase de vida do pet:
+  - Bebê (idade < 3)
+  - Criança (idade de 3 a 11)
+  - Adolescente (idade de 12 a 17)
+  - Adulto (idade ≥ 18)
+  - Uma imagem específica é exibida quando o pet morre.
+- **Área de Log:** Exibe mensagens de status e eventos, oferecendo feedback textual sobre as ações e ocorrências no sistema.
+- **Barras de Progresso:** Indicam visualmente os níveis atuais dos atributos do pet.
+- **Timer Automático:** A cada 10 segundos, o sistema simula a passagem do tempo, atualizando automaticamente os valores dos atributos e gerando eventos aleatórios.
+
+---
+
+## Estrutura do Código
 
 O projeto está dividido em três arquivos principais:
 
-Tamagotchi.java:
-Esta classe encapsula toda a lógica do pet virtual. Ela define os atributos essenciais (nome, idade, fome, felicidade, energia, higiene, socialização, saúde e fase de vida) e implementa métodos que modificam esses atributos de acordo com as ações do usuário e a passagem do tempo.
+1. **Tamagotchi.java**  
+   - **Função:** Encapsula a lógica do pet virtual, definindo atributos como nome, idade, fome, energia, higiene, social, felicidade, saúde e fase de vida.
+   - **Principais Métodos:**
+     - Ações: `feed()`, `play()`, `sleep()`, `clean()`, `socialize()`
+     - Simulação de tempo: `passTime()`
+     - Eventos aleatórios: `randomEvent()`
+     - Atualização: `updateStage()`, `updateHealth()`
+     - Verificação do estado: `checkHealth()`, `isDead()`
 
-Atributos:
-Os atributos são utilizados para simular o estado do Tamagotchi, e seus valores são limitados a intervalos pré-definidos (0 a 100) para garantir consistência e evitar valores inválidos.
+2. **TamagotchiApp.java**  
+   - **Função:** Fornece uma interface de linha de comando para testes e depuração do comportamento do pet, permitindo ações manuais e a visualização dos atributos no terminal.
 
-Métodos de Ação:
-São métodos como feed(), play(), sleep(), clean() e socialize(). Cada um desses métodos modifica os atributos relevantes do pet (por exemplo, alimentar reduz a fome e aumenta a energia).
+3. **TamagotchiGUI.java**  
+   - **Função:** Implementa a interface gráfica utilizando Swing.
+   - **Componentes Principais:**
+     - **Painel de Informações:** Exibe nome, fase e idade do pet.
+     - **Display de Imagem:** Atualizado dinamicamente conforme a fase ou se o pet estiver morto.
+     - **Barras de Progresso:** Para os atributos (fome, energia, felicidade, higiene, social, saúde).
+     - **Área de Log:** Mostra mensagens e eventos em tempo real.
+     - **Botões de Ação:** Permitem ao usuário interagir com o pet (alimentar, brincar, dormir, higiene e socialização).
+     - **Timer:** Simula a passagem do tempo e aciona atualizações automáticas.
 
-Passagem do Tempo e Eventos Aleatórios:
-O método passTime() simula a passagem do tempo e altera os atributos progressivamente. O método randomEvent() gera eventos aleatórios (ex.: dia chuvoso que diminui energia ou dia ensolarado que aumenta a felicidade) com uma chance determinada, fazendo com que o comportamento do pet se torne mais dinâmico.
+---
 
-Atualização de Fase e Saúde:
-O método updateStage() define a fase de vida do Tamagotchi com base na idade (Bebê, Criança, Adolescente, Adulto), enquanto updateHealth() calcula a saúde como uma média dos atributos essenciais, com penalizações caso alguns valores (como fome) estejam fora do ideal.
+## Funcionalidades
 
-Validação de Estado:
-A função isDead() verifica se a saúde do pet atingiu zero, encerrando a simulação.
+- **Interação Manual:**  
+  O usuário pode interagir com o pet por meio de ações que alteram seus atributos.
+  
+- **Passagem do Tempo:**  
+  O sistema simula a passagem do tempo, modificando os atributos automaticamente ou através do modo de depuração manual.
 
-──────────────────────────────
-2. Funcionalidades Implementadas
-──────────────────────────────
+- **Eventos Aleatórios:**  
+  Eventos que afetam atributos (como dias chuvosos ou ensolarados) são gerados com uma probabilidade definida, adicionando imprevisibilidade ao comportamento do pet.
 
-O projeto implementa as seguintes funcionalidades principais:
+- **Feedback Visual e Textual:**  
+  - **Barras de Progresso:** Indicadores visuais para os atributos.
+  - **Área de Log:** Mensagens de status e eventos são exibidas para dar feedback ao usuário.
+  - **Imagens Dinâmicas:** A interface exibe imagens que refletem a fase de vida atual do pet ou sua condição (vivo ou morto).
 
-Interação por Ações:
-O usuário pode acionar diversas interações com o pet, como:
+---
 
-Alimentar: Reduz a fome e aumenta a energia.
+## Decisões de Projeto
 
-Brincar: Aumenta a felicidade e socialização, mas diminui energia e aumenta fome.
+- **Separação entre Lógica e Interface:**  
+  A lógica do pet foi isolada na classe `Tamagotchi.java`, enquanto as interfaces (console e GUI) estão separadas, permitindo fácil manutenção e expansão do projeto.
+  
+- **Atualização Automática via Timer:**  
+  Um `javax.swing.Timer` foi utilizado na GUI para simular a passagem do tempo, garantindo que o pet atualize seus atributos e gere eventos aleatórios periodicamente sem intervenção do usuário.
 
-Dormir: Recupera energia e passa um ciclo de tempo, incrementando a idade.
+- **Uso de Imagens Dinâmicas:**  
+  A decisão de utilizar diferentes imagens para cada fase de vida e um estado específico de "morte" visa enriquecer a experiência do usuário, aproximando a interface da experiência oferecida pelos dispositivos Tamagotchi originais.
 
-Higiene: Melhora o nível de higiene.
+- **Feedback Imediato:**  
+  A implementação de uma área de log na GUI para exibir mensagens de status e eventos proporciona uma visão clara do que está ocorrendo na simulação, facilitando a interação e o debug.
 
-Socializar: Aumenta os níveis de socialização e também a felicidade.
+---
 
-Passagem do Tempo:
-A simulação da passagem do tempo é realizada em dois cenários:
+## Como Executar
 
-Modo Console (TamagotchiApp.java):
-O usuário pode avançar o tempo manualmente através do menu, facilitando testes e depuração.
+### Pré-requisitos
 
-Modo GUI (TamagotchiGUI.java):
-Um timer (javax.swing.Timer) é iniciado para simular "ticks" de 10 segundos. Em cada tick, ocorre a passagem do tempo e possíveis eventos aleatórios, atualizando os atributos do pet de forma contínua.
+- **Java Development Kit (JDK):** Certifique-se de ter o JDK instalado em sua máquina.
+- **Imagens Necessárias:**  
+  Coloque os arquivos de imagem na mesma pasta do projeto:
+  - `bebe.png`
+  - `crianca.png`
+  - `adolescente.png`
+  - `adulto.png`
+  - `morto.png`
 
-Eventos Aleatórios:
-Eventos aleatórios são gerados para simular imprevistos do cotidiano (ex.: dias chuvosos ou ensolarados, acidentes) que afetam os atributos do pet. Essa funcionalidade adiciona imprevisibilidade à simulação.
+### Compilação e Execução
 
-Atualização da Fase de Vida e Imagem:
-Com base na idade, o pet passa pelas fases: Bebê, Criança, Adolescente e Adulto.
+1. **Para o modo GUI:**
 
-A GUI usa arquivos .png diferentes para cada fase, e há um arquivo de imagem exclusivo para quando o pet morre (por exemplo, "morto.png").
+   No terminal, navegue até o diretório do projeto e execute:
 
-A função updateImage() na classe GUI escolhe dinamicamente a imagem correspondente ao estado atual do Tamagotchi.
+   ```bash
+   javac Tamagotchi.java TamagotchiGUI.java
+   java TamagotchiGUI
+   ```
 
-Área de Log na Interface Gráfica:
-Além dos indicadores visuais (barras de progresso), uma área de log foi incorporada à GUI para exibir mensagens de status, como ações realizadas, eventos aleatórios e alertas de saúde. Isso aproxima a experiência do usuário da sensação de interação em dispositivos físicos, onde feedback imediato é essencial.
+2. **Para o modo Console (Depuração):**
 
-──────────────────────────────
-3. Decisões de Projeto e Considerações
-──────────────────────────────
+   Compile e execute:
 
-Durante o desenvolvimento, foram tomadas as seguintes decisões:
+   ```bash
+   javac Tamagotchi.java TamagotchiApp.java
+   java TamagotchiApp
+   ```
 
-Separação de Responsabilidades:
+---
 
-A lógica de negócio e o comportamento do pet foram encapsulados na classe Tamagotchi.java.
+## Possíveis Melhorias
 
-As interfaces de usuário são separadas em dois modos:
+- Adicionar sons e animações para enriquecer a experiência.
+- Implementar um sistema de persistência para salvar o estado do pet.
+- Criar mini-jogos que interajam com os atributos do Tamagotchi.
+- Expandir as funcionalidades da interface gráfica, incluindo novos modos de interação.
 
-Console (TamagotchiApp.java) para depuração e testes manuais;
-
-GUI (TamagotchiGUI.java) para uma experiência interativa e visual que se assemelha a um Tamagotchi físico.
-
-Atualização Automática com Timer:
-A utilização do javax.swing.Timer na GUI permite que o tempo avance automaticamente, simulando um pet "vivo" e garantindo feedback visual constante. Essa abordagem elimina a necessidade de interação manual contínua para testar a evolução do pet.
-
-Utilização de Imagens Dinâmicas:
-Decidiu-se pela alteração da imagem do pet conforme sua fase de vida para proporcionar uma experiência visual mais rica e realista, aproximando o software da experiência oferecida pelos dispositivos Tamagotchi originais.
-
-A imagem muda dinamicamente para refletir as fases: Bebê, Criança, Adolescente e Adulto.
-
-Uma imagem exclusiva é exibida se a saúde do pet chegar a zero, informando ao usuário que o pet "morreu".
-
-Feedback Visual e Textual:
-A área de log na GUI foi implementada para que todas as mensagens geradas pelo sistema — desde a execução de ações até a geração de eventos aleatórios — sejam visíveis na própria interface. Isso ajuda tanto o usuário quanto o desenvolvedor a entender o que está ocorrendo no sistema em tempo real.
-
-Validação e Limitação dos Atributos:
-Para garantir que os atributos permaneçam em intervalos válidos, o código inclui verificações que evitam que valores como fome, energia e saúde ultrapassem limites definidos (0 a 100). Essa abordagem previne erros e torna a simulação mais realista.
-
-──────────────────────────────
-4. Conclusão
-──────────────────────────────
-
-Este projeto de Tamagotchi combina conceitos de Programação Orientada a Objetos com uma interface gráfica interativa, permitindo simular um pet virtual com características e comportamento dinâmicos. As funcionalidades implementadas — desde a interação do usuário com ações básicas até a simulação automatizada do tempo e a exibição de feedback visual e textual — foram pensadas para proporcionar uma experiência completa que se aproxima da experiência de um Tamagotchi real.
-
-As decisões de design, como a separação da lógica de negócio da interface e o uso de imagens dinâmicas, permitem que o projeto seja facilmente mantido e expandido, possibilitando futuras melhorias, como a adição de sons ou animações, caso desejado.
-
-Esta documentação interna serve para orientar desenvolvedores na compreensão da estrutura e dos objetivos do projeto, facilitando possíveis alterações ou expansões que venham a ser necessárias.
+---
