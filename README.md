@@ -136,3 +136,5 @@ O projeto está dividido em três arquivos principais:
 - Expandir as funcionalidades da interface gráfica, incluindo novos modos de interação.
 
 ---
+
+> Este projeto é uma simulação educacional inspirada em jogos de pets virtuais. Não está afiliado, associado ou licenciado pela Bandai ou pela marca Tamagotchi.
